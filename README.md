@@ -59,7 +59,7 @@ Global Events:
 - tx_start
 - tx_finish
 
-Events on method (wathTx):
+Events on method (watchTx):
 
 - tx_start
 - tx_finish
