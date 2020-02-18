@@ -41,6 +41,17 @@ followTx.watchTx(
 
 ```
 
+### 4. Check if the transaction is pending
+
+```
+const followTx = new FollowTx(web3);
+
+if(!followTx.hasPendingTx('deposit')){
+    console.log('The transaction from deposit is pending');
+}
+
+```
+
 ## Events
 
 Global Events:
