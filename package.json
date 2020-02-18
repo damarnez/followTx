@@ -1,0 +1,34 @@
+{
+  "name": "followtx",
+  "private": false,
+  "version": "0.1.0",
+  "description": "Follow your transactions",
+  "author": "@damarnez",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "lint": "eslint . --ext .js,.ts,.tsx"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb-typescript": "^4.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.14.3"
+  },
+  "dependencies": {
+    "@types/node": "12.0.8",
+    "typescript": "3.5.2"
+  }
+}
