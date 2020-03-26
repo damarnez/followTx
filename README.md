@@ -16,15 +16,21 @@ $ npm install followtx
 ```
 import FollowTx form 'followTx';
 
-const web3 = ....
+const web3 = new Web3('wss://{ kovan | mainnet }.infura.io/ws/v3/{your_token}');
 const followTx = new FollowTx(web3);
 
 //Global scope
-followTx.on('tx_start',(tx) => {
+followTx.on('tx_start',(tx,obj) => { // on start transaction
     console.log('Global transaction watcher',tx);
 });
 
+followTx.on('tx_finish',(tx, obj) => { // when the transaction was finished and success
+    console.log('Global transaction watcher',tx);
+});
 
+followTx.on('tx_error',(tx, obj) => { // on transaction error
+    console.log('Global transaction watcher',tx);
+});
 ```
 
 ### 3. Wrapp the transaction to follow
@@ -33,9 +39,10 @@ followTx.on('tx_start',(tx) => {
 const followTx = new FollowTx(web3);
 
 followTx.watchTx(
-    contract.methods.depositFor(address).send({ from: address }),
-    'deposit'
-).on('tx_start',(hash) => {
+    contract.methods.depositFor(address).send({ from: address }),// Transaction - Required
+    {message:'finish transaction deposit'}, // Options - Optional: add objet to pass to the result event
+    'deposit_1234' // ID - Optional: add a identifier of this transaction, must be unique.
+).on('tx_start',(hash, obj ) => {
     console.log('Local transaction',hash);
 });
 
@@ -46,7 +53,11 @@ followTx.watchTx(
 ```
 const followTx = new FollowTx(web3);
 
-if(!followTx.hasPendingTx('deposit')){
+/*
+	To check if you have pending transactions you need to define the 
+	ID param on the wathTx function
+*/
+if(!followTx.hasPendingTx('deposit')){ 
     console.log('The transaction from deposit is pending');
 }
 
@@ -58,8 +69,10 @@ Global Events:
 
 - tx_start
 - tx_finish
+- tx_error
 
 Events on method (watchTx):
 
 - tx_start
 - tx_finish
+- tx_error
